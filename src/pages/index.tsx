@@ -1,7 +1,14 @@
+import Head from "next/head";
+
 export default function Home() {
   return (
     <div>
-      Hello, Next JS!
+      <Head>
+        <title>Home</title>
+      </Head>
+      <div>
+        Hello, Next JS!
+      </div>
     </div>
   )
 }
