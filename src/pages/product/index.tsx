@@ -7,14 +7,14 @@ import useSWR from "swr";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Product = () => {
-    const [isLogin, setIsLogin] = useState(true);
     const [products, setProducts] = useState([]);
     const { push } = useRouter();
-    useEffect(() => {
-        if (!isLogin) {
-            push('/auth/login')
-        }
-    }, []);
+
+    // useEffect(() => {
+    //     if (!isLogin) {
+    //         push('/auth/login')
+    //     }
+    // }, []);
 
     //TODO : fetching data dengan useEffect
     // useEffect(() => {
