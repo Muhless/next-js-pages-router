@@ -14,16 +14,16 @@ const ProductPage = (props: { products: ProductType[] }) => {
         <div>
             <ProductViews products={products} />
         </div>
-    )
-}
+    );
+};
 
-export default ProductPage
+export default ProductPage;
 
 // untuk memanggil request
-export async function getServerSideProps() {
+export async function getStaticProps() {
     // fetch data
     const res = await fetch("http://localhost:3000/api/product")
-    const response = await res.json();
+    const response = await res.json()
 
     return {
         props: {

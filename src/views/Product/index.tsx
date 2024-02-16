@@ -1,6 +1,13 @@
-import { ProductType } from "@/pages/types/Product.type";
+import Link from "next/link";
 import styles from "./Product.module.scss";
 
+type ProductType = {
+    id: string;
+    name: string;
+    price: number;
+    category: string;
+    image: string;
+}
 
 const ProductViews = ({ products }: { products: ProductType[] }) => {
     console.log(products);
@@ -12,7 +19,7 @@ const ProductViews = ({ products }: { products: ProductType[] }) => {
                 {products.length > 0 ? (
                     <>
                         {products.map((product: ProductType) => (
-                            <div key={product.id} className={styles.product__content__item}>
+                            <Link href={`/product/${product.id}`} key={product.id} className={styles.product__content__item}>
                                 <div className={styles.product__content__item__image}>
                                     <img src={product.image} alt={product.name} />
                                 </div>
@@ -28,7 +35,7 @@ const ProductViews = ({ products }: { products: ProductType[] }) => {
                                         currency: 'IDR',
                                     })}
                                 </p>
-                            </div>
+                            </Link>
                         ))}
                     </>
                 ) : (
