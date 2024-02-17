@@ -1,10 +1,9 @@
-import Register from "@/views/Auth/Register"
-import Link from "next/link"
+import RegisterViews from "@/views/Auth/Register"
 
 const RegisterPage = () => {
     return (
         <div>
-            <Register/>
+            <RegisterViews />
         </div>
     )
 }
