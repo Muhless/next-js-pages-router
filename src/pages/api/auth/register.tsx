@@ -1,10 +1,10 @@
+import Register from "@/views/Auth/Register"
 import Link from "next/link"
 
 const RegisterPage = () => {
     return (
         <div>
-            <h1>Register</h1>
-            <p>Sudah punya akun ? Login <Link href={'/auth/login'}>disini</Link></p>
+            <Register/>
         </div>
     )
 }
