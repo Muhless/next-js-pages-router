@@ -10,6 +10,8 @@ const RegisterViews = () => {
     const [error, setError] = useState("")
     const handleSubmit = async (event: any) => {
         event.preventDefault();
+        setError("");
+        setIsLoading(true);
         const data = {
             email: event.target.email.value,
             fullname: event.target.fullname.value,
@@ -33,6 +35,7 @@ const RegisterViews = () => {
     return (
         <div className={styles.register}>
             <h1 className={styles.register__title}>Register</h1>
+            {error && <p className={styles.register__error}>{error}</p>}
             <div className={styles.register__form}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.register__form__item}>
@@ -71,7 +74,9 @@ const RegisterViews = () => {
                             placeholder="password"
                             className={styles.register__form__item__input} />
                     </div>
-                    <button type="submit" className={styles.register__form__item__button}>Register</button>
+                    <button type="submit" className={styles.register__form__item__button} disabled={isLoading}>
+                        {isLoading ? "Loading..." : "Register"}
+                    </button>
                 </form>
             </div>
             <p>Already have an account ? Sign in <Link href='/auth/login' className={styles.register__link}>here</Link></p>
