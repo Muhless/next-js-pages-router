@@ -1,12 +1,40 @@
 import Link from "next/link";
 import styles from "./Register.module.scss";
+import { headers } from "next/headers";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 const RegisterViews = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const { push } = useRouter();
+    const [error, setError] = useState("")
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();
+        const data = {
+            email: event.target.email.value,
+            fullname: event.target.fullname.value,
+            password: event.target.password.value,
+        };
+        const result = await fetch("/api/register", {
+            method: "POST", headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        if (result.status === 200) {
+            event.target.reset();
+            setIsLoading(false);
+            push('/auth/login');
+        } else {
+            setIsLoading(false);
+            setError(result.status === 400 ? "Email Already Exists" : "")
+        }
+    }
     return (
         <div className={styles.register}>
             <h1 className={styles.register__title}>Register</h1>
             <div className={styles.register__form}>
-                <form action="">
+                <form onSubmit={handleSubmit}>
                     <div className={styles.register__form__item}>
                         <label
                             htmlFor="email"

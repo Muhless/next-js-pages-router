@@ -4,6 +4,8 @@ import {
   getDoc,
   getDocs,
   getFirestore,
+  query,
+  where,
 } from "firebase/firestore";
 import app from "./init";
 
@@ -25,4 +27,29 @@ export async function retrieveDataById(collectionName: string, id: string) {
   const data = snapshot.data();
 
   return data;
+}
+
+export async function signUp(
+  userData: {
+    email: string;
+    fullname: string;
+    password: string;
+  },
+  callback: Function
+) {
+  const q = query(
+    collection(firestore, "users"),
+    where("email", "==", userData.email)
+  );
+  const snapshot = await getDocs(q);
+  const data = snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data,
+  }));
+
+  if (data.length > 0) {
+    callback({ status: false, message: "Email Already Exists" });
+  } else {
+    callback({ status: true, message: "Registersuccess" });
+  }
 }
